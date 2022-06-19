@@ -70,6 +70,21 @@ app.post("/sendText", async function sendText(req, res, next) {
     res.json(result);
 });//sendText
 
+app.post("/enviarmk", async function sendText(req, res, next) {
+	console.log(req.body);
+	var sessao = 'session1';
+	var celular = req.body.celular.replace(/[^\d]+/g,'');
+	console.log(celular);
+    var result = await Sessions.sendText(
+        sessao,
+        celular,
+        req.body.mensagem
+    );
+	
+    //console.log(req.body);
+    res.json(result);
+});//sendText
+
 app.post("/sendFile", async (req, res, next) => {
     var result = await Sessions.sendFile(
         req.body.sessionName,
